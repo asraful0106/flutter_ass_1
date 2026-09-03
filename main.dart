@@ -41,3 +41,29 @@ double convert(int choice, double temp) {
       return 0.0;
   }
 }
+
+String formatResult(int choice, double temp, double result) {
+  switch (choice) {
+    case 1:
+      return '${trim(temp)}°C = ${trim(result)}°F';
+    case 2:
+      return '${trim(temp)}°F = ${trim(result)}°C';
+    case 3:
+      return '${trim(temp)}°C = ${trim(result)} K';
+    case 4:
+      return '${trim(temp)} K = ${trim(result)}°C';
+    case 5:
+      return '${trim(temp)}°F = ${trim(result)} K';
+    case 6:
+      return '${trim(temp)} K = ${trim(result)}°F';
+    default:
+      return '';
+  }
+}
+
+String trim(double value) {
+  if (value == value.roundToDouble()) {
+    return value.toStringAsFixed(0);
+  }
+  return value.toStringAsFixed(2);
+}
