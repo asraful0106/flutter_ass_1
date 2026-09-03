@@ -1,6 +1,57 @@
 import 'dart:io';
 
 void main() {
+  bool running = true;
+
+  while (running) {
+    print('====================================');
+    print('       SMART TEMPERATURE CONVERTER');
+    print('====================================');
+    print('');
+    print('1. Celsius to Fahrenheit');
+    print('2. Fahrenheit to Celsius');
+    print('3. Celsius to Kelvin');
+    print('4. Kelvin to Celsius');
+    print('5. Fahrenheit to Kelvin');
+    print('6. Kelvin to Fahrenheit');
+    print('7. Exit');
+    print('');
+    stdout.write('Enter your choice: ');
+    String? choiceInput = stdin.readLineSync();
+    int choice = int.tryParse(choiceInput ?? '') ?? -1;
+
+    if (choice == 7) {
+      running = false;
+      break;
+    }
+
+    if (choice < 1 || choice > 6) {
+      print('');
+      print('Invalid choice. Please try again.');
+      print('');
+      continue;
+    }
+
+    double temp = readTemperature(choice);
+    double result = convert(choice, temp);
+
+    print('');
+    print(formatResult(choice, temp, result));
+    print('');
+
+    stdout.write('Do you want to perform another conversion? (y/n): ');
+    String? again = stdin.readLineSync();
+    print('');
+
+    if (again == null || again.trim().toLowerCase() != 'y') {
+      running = false;
+    }
+  }
+
+  print('====================================');
+  print('       Thank You!');
+  print('       Program Ended');
+  print('====================================');
 }
 
 double readTemperature(int choice) {
